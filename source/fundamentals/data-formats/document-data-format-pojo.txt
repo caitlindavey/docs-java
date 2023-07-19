@@ -210,12 +210,25 @@ the collection and then retrieve it as a ``List`` of your POJO class objects:
    collection.find().into(flowers);
    System.out.println(flowers);
 
+   //update result
+   updateResult = flower.updateOne(eq("name", "rose"), combine(set("height", 23), set("name", "tulip")));
+   System.out.println(updateResult.getModifiedCount());
+
+   //delete result
+   DeleteResult deleteOne = flowers.deleteOne(Filters.eq("name", "tulip"));
+   System.out.println(deleteOne);
+
 When you run this code, your output should look something like this:
 
 .. code-block:: none
    :copyable: false
 
+   //insert flower and return all documents in the collection
    [Flower [id=5f7f87659ed5b07cf3480a06, name=rose, colors=[green, red], isBlooming=false, height=25.4]]
+   //updated result
+   1
+   //delete result
+   AcknowledgedDeleteResult{deletedCount=1} 
 
 .. note::
 
